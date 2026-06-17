@@ -1,0 +1,43 @@
+EUROPEAN BANKING BENCHMARKS
+Source: PwC Strategy& Retail Banking Monitor 2025
+=======================================================
+
+CHURN BENCHMARKS
+-----------------
+Industry avg churn rate : 5–15%
+Our dataset churn rate  : ~20% (above average — red flag)
+Highest churn country   : Germany (32.4%)
+#1 churn reason         : Poor customer experience
+                          (laggy UX, rigid policies, 
+                           broken support, fees with 
+                           no service improvement)
+
+2024 MARKET KPIs
+-----------------
+Deposit volume growth   : +2%
+Loan volume growth      : +1%
+Topline (Revenue)       : +3%
+Operating costs         : +3%  (margins not improving)
+Operating profit        : +4%  (efficiency-driven)
+
+INCOME PER CUSTOMER (2024)
+---------------------------
+Total income/customer   : €658
+Net interest income     : €454 (69%) ← dominant driver
+Fee & commission income : €178 (27%)
+Trend 2018→2024         : €548 → €658 (+20% over 6 years)
+
+KEY ANALYTICAL IMPLICATIONS
+-----------------------------
+1. Our dataset churn (~20%) exceeds industry avg (15%)
+   — signals an above-average retention problem
+2. Germany's 32.4% churn confirms H2 hypothesis
+3. Rising income/customer means high-balance churners
+   cost more than just their balance suggests
+4. Cost growing = profits = banks need retention,
+   not just acquisition
+
+TERMINOLOGY
+-----------
+Topline     = Revenue (top line of P&L statement)
+Bottom line = Net Profit

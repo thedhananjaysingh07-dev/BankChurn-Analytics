@@ -1,0 +1,17 @@
+H1: Older customers churn less due to 
+    switching costs and stability preference
+
+H2: Germany has the highest churn rate due 
+    to superior local competition
+
+H3: Single-product customers with high balance 
+    are a high-risk hidden segment
+
+H4: Inactive members may be dormant savers, 
+    not disengaged customers
+
+H5: Female customers churn more due to 
+    higher service quality sensitivity
+
+H6: New customers (0-2 yr tenure) churn most 
+    due to honeymoon promotional behaviour
