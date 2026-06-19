@@ -1,0 +1,160 @@
+================================================================
+EXECUTIVE SUMMARY — RUNNING NOTES
+European Bank Customer Churn & Segmentation Analytics
+Unified Mentor | Finance Analytics Project
+Last updated: Day 6
+================================================================
+
+
+1. HEADLINE NUMBERS (Lead with these)
+----------------------------------------------------------------
+  Total customers analysed        : 10,000
+  Customers churned               : 2,037
+  Overall churn rate              : 20.37%
+  Industry benchmark (Europe)     : 15% (PwC Strategy& 2025)
+  Gap vs benchmark                : +5.37 percentage points
+
+  TOTAL REVENUE AT RISK           : €185,588,094.63
+  Concentration in High+Premium   : 83% (€154.4M of €185.5M)
+  Customers behind that 83%       : 1,208 of 2,037 churned (59%)
+
+
+2. HYPOTHESIS SCORECARD
+----------------------------------------------------------------
+  H1  Older customers churn less (switching cost theory)
+      STATUS   : REJECTED
+      EVIDENCE : <30 churns least (7.52%). 46-60 churns most
+                 (51.12%) — more than double the overall avg.
+                 60+ sits at 24.78%, moderate.
+      TAKEAWAY : Loyalty does not rise linearly with age.
+                 Financially confident, high-earning mid-life
+                 customers are the least loyal, not the most.
+
+  H2  Germany churns more due to stronger local competition
+      STATUS   : CONFIRMED
+      EVIDENCE : Germany 32.44% vs France 16.15% / Spain 16.67%
+                 — almost exactly double. Matches external PwC
+                 benchmark of 32.4% for Germany.
+      TAKEAWAY : Country-specific problem, not a product-wide
+                 issue. Retention strategy must be localized.
+
+  H3  Single/high-product customers with high balance are a
+      hidden high-risk segment
+      STATUS   : CONFIRMED (via CLV analysis)
+      EVIDENCE : High CLV churn 24.12%, Premium CLV churn
+                 24.20% — both above the 20.37% overall average,
+                 and both hold the largest average balances
+                 among churned customers (€117.5K and €138K).
+      TAKEAWAY : The bank disproportionately loses its most
+                 profitable customers, not its average ones.
+
+  H4  Inactive members may be dormant savers, not disengaged
+      STATUS   : PARTIALLY CONFIRMED
+      EVIDENCE : Inactive members churn at 26.85% vs Active at
+                 14.27% — engagement does correlate with churn.
+                 BUT Zero-balance customers churn LEAST of all
+                 balance segments (13.82%), supporting the
+                 "dormant safety-net account" theory.
+      TAKEAWAY : Two different inactive populations exist —
+                 genuinely disengaged leavers, and quiet
+                 zero-balance holders who are not at risk.
+
+  H5  Female customers churn more (service-quality sensitivity)
+      STATUS   : CONFIRMED
+      EVIDENCE : Female churn 25.07% vs Male 16.46% — a 52%
+                 relative gap. Female churn pulls the overall
+                 average upward; male churn sits near benchmark.
+      TAKEAWAY : Retention messaging / service review should be
+                 segmented by gender, not generic.
+
+  H6  New customers churn more due to "honeymoon" promotional
+      behaviour
+      STATUS   : WEAKLY SUPPORTED
+      EVIDENCE : Tenure groups show little spread — New 21.15%,
+                 Mid 20.64%, Long 19.51%. Direction is correct
+                 (newer = higher) but the magnitude is small.
+      TAKEAWAY : Promotional churn may exist but is not a major
+                 standalone driver in this dataset — likely
+                 entangled with the Product-count effect below.
+
+
+3. NON-OBVIOUS / SURPRISING INSIGHTS
+----------------------------------------------------------------
+  a) U-SHAPED PRODUCT CHURN (most important secondary finding)
+     1 product  : 27.71% churn
+     2 products : 7.58%  churn  ← safest segment in dataset
+     3 products : 82.71% churn  ← near-catastrophic
+     4 products : 100.00% churn ← total loss, every customer
+     Reading    : 2 products = healthy engagement. 3-4 products
+                  likely reflects aggressive cross-selling that
+                  damages trust rather than building loyalty.
+
+  b) CREDIT SCORE IS NOT A CHURN DRIVER
+     High 20.18% | Medium 19.64% | Low 22.15% — a spread of
+     only 2.5 points. Contradicts the common banking assumption
+     that creditworthiness predicts loyalty.
+
+  c) TENURE GROUP IS NOT A STRONG CHURN DRIVER
+     New 21.15% | Mid 20.64% | Long 19.51% — flat. Loyalty does
+     not meaningfully build over time in this dataset.
+
+  d) CREDIT CARD OWNERSHIP HAS NO EFFECT
+     Has card 20.18% vs No card 20.81% — statistically
+     indistinguishable. A commonly assumed "stickiness" feature
+     turns out to be irrelevant.
+
+  e) ZERO-BALANCE CUSTOMERS ARE THE MOST LOYAL SEGMENT
+     13.82% churn, lowest of any Balance segment — counter-
+     intuitive, supports dormant-account / safety-net behaviour
+     rather than disengagement.
+
+
+4. REVENUE BREAKDOWN BY CLV SEGMENT
+----------------------------------------------------------------
+  Segment   Churned   Churn Rate   Total Lost      Avg Balance
+  --------  --------  -----------  --------------  -----------
+  Premium      605      24.20%      €83,541,128.12   €138,084
+  High         603      24.12%      €70,898,760.31   €117,577
+  Medium       483      19.32%      €30,434,466.59    €63,011
+  Low          346      13.84%         €713,739.61     €2,063
+  --------  --------  -----------  --------------  -----------
+  TOTAL      2,037                  €185,588,094.63
+
+  Reading: churn rate rises with CLV tier (except Medium dips
+  slightly), and the euro damage concentrates almost entirely
+  in the two highest tiers. The bank's retention failure is
+  not random — it is concentrated exactly where it hurts most.
+
+
+5. KEY TERMINOLOGY (for consistent use in the paper)
+----------------------------------------------------------------
+  Topline       = Revenue (top line of P&L statement)
+  Bottom line   = Net profit
+  CLV           = Customer Lifetime Value (weighted: Balance
+                  50% + Salary 30% + Tenure 20%)
+  Switching cost = Friction (paperwork, habit, perceived risk)
+                  that discourages a customer from leaving
+
+
+6. RECOMMENDATIONS (build out as analysis progresses)
+----------------------------------------------------------------
+  [Draft — to be finalized after ML + ROI Simulator work]
+  1. Germany-specific retention task force — investigate local
+     competitor offers and service gaps driving 32.44% churn.
+  2. Targeted relationship-management program for High/Premium
+     CLV customers — proactive outreach before churn signals
+     appear (inactivity, product reduction).
+  3. Review cross-sell practices for 3rd/4th product customers —
+     current approach correlates with churn, not loyalty.
+
+
+7. OPEN QUESTIONS / LIMITATIONS TO MENTION IN PAPER
+----------------------------------------------------------------
+  • Dataset lacks transaction-level / call-centre / NPS data,
+    so root causes (e.g. why Germany churns more) are inferred,
+    not directly observed.
+  • Low Balance segment churn (34.67%) is based on a small
+    sample (75 customers) — flagged as low-confidence.
+  • Product identity (what products 1-4 actually are) is
+    assumed from typical European retail banking patterns,
+    not confirmed by the dataset itself.
