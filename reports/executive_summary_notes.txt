@@ -223,3 +223,31 @@ misleading without segment-level analysis.
 CreditScore and EstimatedSalary show near-complete overlap 
 between churned/retained — visually confirms near-zero 
 correlation, low value as standalone churn predictors.
+
+
+
+
+
+
+SURVIVAL ANALYSIS — OVERALL
+------------------------------
+Customer survival curve shows steady, gradual decline 
+(no sharp early cliff). Suggests churn driven by ongoing 
+service quality erosion, not a single onboarding shock.
+H6 (honeymoon churn) NOT strongly supported by survival 
+shape — early-tenure decline (yrs 0-2) is gentle, not steep.
+Caution: steepest visual drop at yrs 8-10 likely reflects 
+small remaining sample size, not accelerating risk.
+
+
+
+
+SURVIVAL ANALYSIS — BY GEOGRAPHY
+-----------------------------------
+Germany separates from France/Spain almost immediately 
+(by year 2-3) and gap widens continuously through year 10.
+Germany ends at ~35% survival vs ~70% for France/Spain.
+Conclusion: Germany's churn problem is structural and 
+present from early in the relationship — NOT a late-stage 
+or fatigue-driven issue. Requires immediate-onboarding-
+stage intervention, not just long-term retention programs.
