@@ -251,3 +251,54 @@ Conclusion: Germany's churn problem is structural and
 present from early in the relationship — NOT a late-stage 
 or fatigue-driven issue. Requires immediate-onboarding-
 stage intervention, not just long-term retention programs.
+
+
+
+
+
+SURVIVAL ANALYSIS — ACTIVE VS INACTIVE
+------------------------------------------
+Active members maintain ~70% survival at year 10 vs ~42% 
+for Inactive members. Gap is consistent and widens steadily 
+throughout tenure — engagement is a durable protective 
+factor, not just a short-term signal. Reinforces H4: 
+activity status is a genuine churn driver, separate from 
+the dormant zero-balance segment identified earlier.
+
+
+
+
+SURVIVAL ANALYSIS — HIGH VS LOW CLV
+---------------------------------------
+Premium consistently below Low throughout curve (confirms 
+H3). Gap widens after year 6. By year 10: Low ~58% 
+survival vs Premium ~48%.
+
+KEY INSIGHT: Low CLV still loses 40%+ customers by year 
+10 — not loyalty-proof, just lower-friction-to-leave AND 
+lower-friction-to-retain. Low switching costs cut both 
+ways — Premium leaves despite retention efforts; Low CLV 
+leaves because nothing anchors them (no loan, low balance, 
+underdeveloped relationship).
+
+
+
+
+
+POINT-BISERIAL CORRELATION RANKING
+-------------------------------------
+1. Age                 +0.2853 ✅ (strongest predictor)
+2. IsActiveMember      -0.1561 ✅
+3. EngagementScore     -0.1379 ✅ (engineered feature)
+4. Balance             +0.1185 ✅
+5. CLV_Score           +0.1088 ✅ (engineered feature)
+6. NumOfProducts       -0.0478 ✅ (U-shaped — linear corr misleading)
+7. CreditScore         -0.0271 ✅ (significant but not practical)
+8. Balance_Salary_Ratio +0.0256 ✅
+9. Tenure              -0.0140 ❌
+10. EstimatedSalary    +0.0121 ❌
+11. HasCrCard          -0.0071 ❌
+
+KEY INSIGHT: Two engineered features (EngagementScore, 
+CLV_Score) rank in top 5 — feature engineering added 
+genuine predictive value beyond raw variables.
