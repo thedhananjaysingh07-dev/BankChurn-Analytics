@@ -302,3 +302,29 @@ POINT-BISERIAL CORRELATION RANKING
 KEY INSIGHT: Two engineered features (EngagementScore, 
 CLV_Score) rank in top 5 — feature engineering added 
 genuine predictive value beyond raw variables.
+
+
+
+
+CUSTOMER PERSONAS (K-Means, K=4)
+-----------------------------------
+Cluster 0 — "The Active Saver"
+  Balance: €122K | Active | CLV: €93K | Germany 37%
+  Churn: 15.94% | Moderate risk, Germany exposure
+
+Cluster 1 — "The Loyal Everyday Banker"  
+  Balance: €10K | Active | CLV: €34K | France 64%
+  Churn: 11.89% | Lowest risk, safest segment
+
+Cluster 2 — "The Disengaged Dormant"
+  Balance: €7K | INACTIVE | CLV: €33K | France 64%
+  Churn: 20.23% | Average risk, zero engagement
+
+Cluster 3 — "The At-Risk Premium"
+  Balance: €123K | INACTIVE | CLV: €94K | Germany 41%
+  Churn: 31.18% | HIGHEST RISK — priority target
+
+KEY INSIGHT: Balance is nearly identical in Clusters 0 
+and 3 (~€122K vs €123K). The ONLY meaningful difference 
+is engagement (Active vs Inactive). Re-engagement of 
+Cluster 3 = highest ROI retention intervention available.
