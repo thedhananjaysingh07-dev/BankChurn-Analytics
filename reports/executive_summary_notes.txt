@@ -328,3 +328,33 @@ KEY INSIGHT: Balance is nearly identical in Clusters 0
 and 3 (~€122K vs €123K). The ONLY meaningful difference 
 is engagement (Active vs Inactive). Re-engagement of 
 Cluster 3 = highest ROI retention intervention available.
+
+"Clusters 0 and 3 hold identical balances (~€122K) but churn at 15.94% vs 31.18%. The sole differentiator is engagement status. Re-engaging Cluster 3 (2,931 customers) is the single highest-ROI retention intervention available."
+
+
+"Cluster 3 (At-Risk Premium): 2,931 customers, €123K avg balance, 31% churn. Financially identical to Cluster 0 but fully inactive. Targeted re-engagement campaign is highest priority retention action."
+
+
+═══════════════════════════════════════════════════
+CUSTOMER PERSONAS — DAY 11
+═══════════════════════════════════════════════════
+
+CLUSTER 0 — ACTIVE SAVER (3,024 customers | 16% churn)
+High-balance (€122K), fully engaged customers below our 
+churn average. Low product count (1.31) signals untapped 
+cross-sell opportunity despite strong loyalty.
+
+CLUSTER 1 — LOYAL EVERYDAY BANKER (2,127 customers | 12% churn)
+Low-balance (€10K), fully active, France-dominant segment. 
+Our most stable customers and internal retention benchmark.
+
+CLUSTER 2 — DISENGAGED DORMANT (1,918 customers | 20% churn)
+Low-balance (€7K), inactive customers churning at exactly 
+our overall average. Inactivity is the risk flag — 
+intervention cost likely exceeds revenue saved here.
+
+CLUSTER 3 — AT-RISK PREMIUM (2,931 customers | 31% churn)
+Financially identical to Cluster 0 (€123K balance) but 
+fully inactive. Highest-priority retention target — 
+re-engagement alone could halve churn risk.
+═══════════════════════════════════════════════════
