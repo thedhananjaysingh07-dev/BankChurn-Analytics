@@ -357,4 +357,7 @@ CLUSTER 3 — AT-RISK PREMIUM (2,931 customers | 31% churn)
 Financially identical to Cluster 0 (€123K balance) but 
 fully inactive. Highest-priority retention target — 
 re-engagement alone could halve churn risk.
-═══════════════════════════════════════════════════
+
+"Baseline model comparison: Decision Tree (Recall 64%) significantly outperforms Logistic Regression (Recall 40%) on churn identification. Decision Tree selected as foundation for further optimisation."
+
+
