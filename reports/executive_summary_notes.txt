@@ -361,3 +361,17 @@ re-engagement alone could halve churn risk.
 "Baseline model comparison: Decision Tree (Recall 64%) significantly outperforms Logistic Regression (Recall 40%) on churn identification. Decision Tree selected as foundation for further optimisation."
 
 
+"Random Forest selected as primary model — 64% churn recall, 0.61 F1-score. Outperforms Logistic Regression recall by 24 points. Further optimisation via GridSearchCV planned for Day 14."
+
+"ROC analysis confirms Random Forest (AUC 0.851) as primary model. Logistic Regression (AUC 0.698) eliminated from consideration. XGBoost (AUC 0.836) retained as strong alternative pending hyperparameter tuning on Day 14."
+
+"Hyperparameter tuning improved precision and accuracy but marginally reduced recall — reflecting a more conservative model. The choice between original and tuned Random Forest depends on business strategy: aggressive retention favours higher recall, targeted outreach favours higher precision."
+
+"We recommend Random Forest as our production model for three reasons. First, on a dataset of 10,000 customers it generalises well without overfitting — tuning didn't significantly improve performance, confirming the defaults were already appropriate for this data size. Second, it achieves the highest recall among reliable models at 64% with 83% accuracy — identifying 2 in 3 churners correctly. Third, its F1-Score of 0.61 is the highest in the comparison — reflecting the best balance between catching churners and avoiding unnecessary outreach."
+
+
+"Final model selected: Random Forest — Recall 0.64, Precision 0.59, F1 0.61, Accuracy 0.83. Outperforms all alternatives on combined metric balance. Tuning confirmed original hyperparameters near-optimal for this dataset size."
+
+"SHAP global analysis confirms Age and IsActiveMember as the two dominant churn predictors — each with ~0.12 mean SHAP value, more than double any other feature. Geography_Germany ranks third, validating our EDA findings. Balance ranks 9th — confirming that engagement status matters more than financial commitment alone."
+
+"SHAP dot plot confirms three key churn drivers: high Age pushes toward churn, inactive status (IsActiveMember=0) strongly predicts churn, and NumOfProducts shows a U-shaped risk pattern — both extremes increase churn probability."
