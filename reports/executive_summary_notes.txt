@@ -375,3 +375,5 @@ re-engagement alone could halve churn risk.
 "SHAP global analysis confirms Age and IsActiveMember as the two dominant churn predictors — each with ~0.12 mean SHAP value, more than double any other feature. Geography_Germany ranks third, validating our EDA findings. Balance ranks 9th — confirming that engagement status matters more than financial commitment alone."
 
 "SHAP dot plot confirms three key churn drivers: high Age pushes toward churn, inactive status (IsActiveMember=0) strongly predicts churn, and NumOfProducts shows a U-shaped risk pattern — both extremes increase churn probability."
+
+"Risk scoring system assigns churn probability to all customers across 4 tiers. Critical Risk tier (232 customers) shows 73.7% actual churn rate — validating model as production-ready prioritisation tool for retention teams."
