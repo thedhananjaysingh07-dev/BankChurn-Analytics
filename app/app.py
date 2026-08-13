@@ -644,4 +644,251 @@ with tab4:
             showlegend=False
         )
         st.plotly_chart(fig_box, use_container_width=True)
-        st.caption("Churned customers hold higher median balance — financial disengagement, not poverty")        
+        st.caption("Churned customers hold higher median balance — financial disengagement, not poverty")
+        
+        # ── TAB 5: CHURN PREDICTOR ──
+with tab5:
+    st.title("Churn Predictor")
+    st.caption("Live ML model — Random Forest | AUC 0.851 | Recall 64%")
+    st.markdown("---")
+
+    # ── SECTION 1: Risk Score Explorer ──
+    st.subheader("Customer Risk Score Explorer")
+    
+    risk_tier_filter = st.selectbox(
+        "Filter by Risk Tier",
+        options=['All', 'Critical Risk', 'High Risk', 
+                 'Medium Risk', 'Low Risk']
+    )
+    
+    if risk_tier_filter == 'All':
+        display_risk = risk_df
+    else:
+        display_risk = risk_df[risk_df['Risk_Tier'] == risk_tier_filter]
+    
+    # Risk tier summary metrics
+    r1, r2, r3, r4 = st.columns(4)
+    
+    with r1:
+        critical = len(risk_df[risk_df['Risk_Tier']=='Critical Risk'])
+        st.metric("Critical Risk", critical, "73.7% actual churn")
+    with r2:
+        high = len(risk_df[risk_df['Risk_Tier']=='High Risk'])
+        st.metric("High Risk", high, "41.8% actual churn")
+    with r3:
+        medium = len(risk_df[risk_df['Risk_Tier']=='Medium Risk'])
+        st.metric("Medium Risk", medium, "18.8% actual churn")
+    with r4:
+        low = len(risk_df[risk_df['Risk_Tier']=='Low Risk'])
+        st.metric("Low Risk", low, "6.1% actual churn")
+
+    st.dataframe(
+        display_risk[['Churn_Probability', 'Risk_Tier', 
+                      'Actual_Churn', 'Age', 'Balance',
+                      'IsActiveMember', 'Geography_Germany',
+                      'Geography_France', 'Geography_Spain']]\
+        .sort_values('Churn_Probability', ascending=False)\
+        .head(50),
+        use_container_width=True
+    )
+    
+    st.markdown("---")
+    
+    # ── SECTION 2: Individual Predictor ──
+    st.subheader("Individual Customer Churn Predictor")
+    st.caption("Input customer details to get instant churn probability")
+    
+    import pickle
+    
+    @st.cache_resource
+    def load_model():
+        with open(r'D:\Python project\models\rf_model.pkl', 'rb') as f:
+            return pickle.load(f)
+    
+    model = load_model()
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        age = st.slider("Age", 18, 92, 40)
+        balance = st.number_input("Account Balance (€)", 0, 300000, 50000)
+        credit_score = st.slider("Credit Score", 350, 850, 650)
+        estimated_salary = st.number_input("Estimated Salary (€)", 
+                                            0, 200000, 80000)
+        tenure = st.slider("Tenure (Years)", 0, 10, 5)
+    
+    with col2:
+        num_products = st.selectbox("Number of Products", [1, 2, 3, 4])
+        has_cr_card = st.selectbox("Has Credit Card", [1, 0], 
+                                    format_func=lambda x: "Yes" if x==1 else "No")
+        is_active = st.selectbox("Is Active Member", [1, 0],
+                                  format_func=lambda x: "Yes" if x==1 else "No")
+        geography = st.selectbox("Geography", 
+                                  ["France", "Germany", "Spain"])
+        gender = st.selectbox("Gender", ["Male", "Female"])
+    
+    with col3:
+        # Engineered features
+        clv_score = (balance * 0.5) + (estimated_salary * 0.3) + (tenure * 1000 * 0.2)
+        engagement = is_active * num_products
+        bal_sal_ratio = balance / estimated_salary if estimated_salary > 0 else 0
+        
+        st.metric("CLV Score", f"€{clv_score:,.0f}")
+        st.metric("Engagement Score", engagement)
+        st.metric("Balance/Salary Ratio", f"{bal_sal_ratio:.2f}")
+    
+    if st.button("Predict Churn Risk", type="primary"):
+        # Build input array
+        input_data = pd.DataFrame([{
+            'CreditScore': credit_score,
+            'Gender': 1 if gender == 'Female' else 0,
+            'Age': age,
+            'Tenure': tenure,
+            'Balance': balance,
+            'NumOfProducts': num_products,
+            'HasCrCard': has_cr_card,
+            'IsActiveMember': is_active,
+            'EstimatedSalary': estimated_salary,
+            'CLV_Score': clv_score,
+            'EngagementScore': engagement,
+            'Balance_Salary_Ratio': bal_sal_ratio,
+            'Geography_France': 1 if geography == 'France' else 0,
+            'Geography_Germany': 1 if geography == 'Germany' else 0,
+            'Geography_Spain': 1 if geography == 'Spain' else 0
+        }])
+        
+        prob = model.predict_proba(input_data)[0][1]
+        
+        if prob >= 0.70:
+            tier = "CRITICAL RISK"
+            color = "#e74c3c"
+        elif prob >= 0.50:
+            tier = "HIGH RISK"
+            color = "#e67e22"
+        elif prob >= 0.30:
+            tier = "MEDIUM RISK"
+            color = "#f39c12"
+        else:
+            tier = "LOW RISK"
+            color = "#2ecc71"
+        
+        st.markdown(f"""
+        <div style="background: rgba(255,255,255,0.05); 
+                    border: 2px solid {color};
+                    border-radius: 16px; padding: 24px;
+                    text-align: center; margin-top: 20px;">
+            <div style="font-size: 14px; color: #8B949E; 
+                        text-transform: uppercase; 
+                        letter-spacing: 2px;">Churn Probability</div>
+            <div style="font-size: 48px; font-weight: 700; 
+                        color: {color};">{prob*100:.1f}%</div>
+            <div style="font-size: 18px; font-weight: 600; 
+                        color: {color};">{tier}</div>
+        </div>
+        """, unsafe_allow_html=True)      
+        
+# ── TAB 6: RETENTION ROI SIMULATOR ──
+with tab6:
+    st.title("Retention ROI Simulator")
+    st.caption("Calculate financial return of retention interventions")
+    st.markdown("---")
+
+    st.subheader("Simulation Parameters")
+
+    s1, s2 = st.columns(2)
+
+    with s1:
+        total_churners = 2037
+        avg_balance_churned = 185588094.63 / 2037
+
+        churn_reduction = st.slider(
+            "Expected Churn Reduction (%)",
+            min_value=5,
+            max_value=50,
+            value=20,
+            step=5
+        )
+
+        campaign_cost = st.number_input(
+            "Campaign Cost per Customer (€)",
+            min_value=0,
+            max_value=5000,
+            value=200,
+            step=50
+        )
+
+        target_segment = st.selectbox(
+            "Target Segment",
+            options=['All Churners', 'Critical Risk Only',
+                     'High + Critical Risk']
+        )
+
+    with s2:
+        # Calculate based on segment
+        if target_segment == 'Critical Risk Only':
+            target_customers = 232
+            segment_churn_rate = 0.737
+        elif target_segment == 'High + Critical Risk':
+            target_customers = 232 + 213
+            segment_churn_rate = 0.578
+        else:
+            target_customers = total_churners
+            segment_churn_rate = 0.2037
+
+        customers_saved = int(target_customers * churn_reduction / 100)
+        revenue_saved = customers_saved * avg_balance_churned
+        total_campaign_cost = target_customers * campaign_cost
+        net_roi = revenue_saved - total_campaign_cost
+        roi_percentage = (net_roi / total_campaign_cost * 100) \
+                         if total_campaign_cost > 0 else 0
+
+        st.markdown("### Simulation Results")
+        st.markdown("---")
+
+        m1, m2 = st.columns(2)
+        with m1:
+            st.metric("Customers Targeted", f"{target_customers:,}")
+            st.metric("Customers Saved", f"{customers_saved:,}")
+        with m2:
+            st.metric("Revenue Saved", f"€{revenue_saved/1e6:.2f}M")
+            st.metric("Campaign Cost", f"€{total_campaign_cost:,}")
+
+        if net_roi > 0:
+            st.success(f"✅ Net ROI: €{net_roi/1e6:.2f}M ({roi_percentage:.0f}% return)")
+        else:
+            st.error(f"❌ Net Loss: €{abs(net_roi)/1e6:.2f}M — increase reduction % or lower cost")
+
+    st.markdown("---")
+
+    # ROI chart across different reduction scenarios
+    scenarios = list(range(5, 55, 5))
+    roi_values = []
+
+    for pct in scenarios:
+        saved = int(target_customers * pct / 100)
+        rev = saved * avg_balance_churned
+        cost = target_customers * campaign_cost
+        roi_values.append((rev - cost) / 1e6)
+
+    fig_roi = px.line(
+        x=scenarios,
+        y=roi_values,
+        title='Net ROI vs Churn Reduction % — Scenario Analysis',
+        template='plotly_dark',
+        markers=True
+    )
+    fig_roi.update_traces(
+        line_color='#2B8EFF',
+        marker_color='#2B8EFF'
+    )
+    fig_roi.add_hline(y=0, line_dash="dash",
+                      line_color="#e74c3c",
+                      annotation_text="Break Even")
+    fig_roi.update_layout(
+        plot_bgcolor='rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
+        xaxis_title='Churn Reduction %',
+        yaxis_title='Net ROI (€M)'
+    )
+    st.plotly_chart(fig_roi, use_container_width=True)
+    st.caption("Drag the sliders above to see how ROI changes with different intervention strategies")        
