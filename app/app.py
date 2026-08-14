@@ -91,12 +91,12 @@ st.markdown("""
 # ── DATA LOADING ──
 @st.cache_data
 def load_data():
-    df = pd.read_csv(r'D:\Python project\data\European_Bank_Segmented.csv')
+    df = pd.read_csv('data/European_Bank_Segmented.csv')
     return df
 
 @st.cache_data
 def load_risk_scores():
-    risk_df = pd.read_csv(r'D:\Python project\data\Customer_Risk_Scores.csv')
+    risk_df = pd.read_csv('data/Customer_Risk_Scores.csv')
     return risk_df
 
 # Load data
@@ -723,7 +723,7 @@ with tab5:
 
     @st.cache_resource
     def load_model():
-        with open(r'D:\Python project\models\rf_model.pkl', 'rb') as f:
+        with open('models/rf_model.pkl', 'rb') as f:
             return pickle.load(f)
 
     model = load_model()
